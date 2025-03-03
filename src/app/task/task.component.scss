@@ -1,0 +1,63 @@
+.task-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: grab;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+}
+
+.task-desc {
+  font-size: 14px;
+  color: #555;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.priority-label {
+  &.low {
+    color: green;
+  }
+
+  &.medium {
+    color: orange;
+  }
+
+  &.high {
+    color: red;
+  }
+}
+
+.status-label {
+  color: #666;
+}

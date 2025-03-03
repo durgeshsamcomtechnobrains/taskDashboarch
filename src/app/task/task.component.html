@@ -1,0 +1,14 @@
+<div class="task-card" [ngClass]="getPriorityClass(task.priority)">
+  <div class="task-header">
+    <h3>{{ task.title }}</h3>
+    <div class="task-actions">
+      <button (click)="onEdit()" title="Edit Task">✏️</button>
+      <button (click)="onDelete()" title="Delete Task">🗑️</button>
+    </div>
+  </div>
+  <p class="task-desc">{{ task.description }}</p>
+  <div class="task-footer">
+    <span class="priority-label">{{ task.priority }}</span>
+    <span class="status-label">{{ task.status }}</span>
+  </div>
+</div>

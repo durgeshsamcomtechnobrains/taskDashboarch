@@ -1,0 +1,19 @@
+<div class="task-board">
+  <div class="task-column" *ngFor="let status of statuses">
+    <h2>{{ status }}</h2>
+    <div
+      cdkDropList
+      [cdkDropListData]="getTasksByStatus(status)"
+      (cdkDropListDropped)="onDrop($event, status)"
+      class="task-list"
+    >
+      <app-task
+        *ngFor="let task of getTasksByStatus(status)"
+        [task]="task"
+        (edit)="onEditTask($event)"
+        (delete)="onDeleteTask($event)"
+        cdkDrag
+      ></app-task>
+    </div>
+  </div>
+</div>
