@@ -1,33 +1,46 @@
 <div class="task-board-container">
-  <!-- Add Column Button -->
   <button class="add-column-btn" (click)="addColumn()">➕ Add Column</button>
-
   <div class="board-wrapper">
     <div class="task-board">
       <div class="task-column" *ngFor="let status of statuses">
-        <h2>{{ status }}</h2>
-        <div cdkDropList [cdkDropListData]="getTasksByStatus(status)" (cdkDropListDropped)="onDrop($event, status)"
-          class="task-list">
-          <app-task *ngFor="let task of getTasksByStatus(status)" [task]="task" (edit)="onEditTask($event)"
-            (delete)="onDeleteTask($event)" cdkDrag></app-task>
+        <div class="column-header">
+          <h2>{{ status }}</h2>
+          <button class="add-task-btn" (click)="openTaskDrawer(status)">➕ Add Task</button>
+        </div>
+
+        <div cdkDropList [cdkDropListData]="getTasksByStatus(status)"
+             (cdkDropListDropped)="onDrop($event, status)" class="task-list">
+          <app-task *ngFor="let task of getTasksByStatus(status)"
+                    [task]="task"
+                    (edit)="onEditTask($event)"
+                    (delete)="onDeleteTask($event)" cdkDrag>
+          </app-task>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="add-task-panel">
-      <h3>Add Task</h3>
-      <input type="text" [(ngModel)]="newTaskTitle" placeholder="Task Title" />
-      <input type="text" [(ngModel)]="newTaskDescription" placeholder="Task Description" />
-      <select [(ngModel)]="newTaskPriority">
-        <option [ngValue]="null" disabled selected>Priority</option>
-        <option [ngValue]="'Low'">Low</option>
-        <option [ngValue]="'Medium'">Medium</option>
-        <option [ngValue]="'High'">High</option>
-      </select>
-      <select [(ngModel)]="selectedStatus">
-        <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>
-      </select>
-      <button class="add-task-btn" (click)="addTask()">➕ Add Task</button>
+<div class="task-drawer" [ngClass]="{ 'open': isDrawerOpen }">
+  <div class="task-drawer-content">
+    <div class="drawer-header">
+      <h3>{{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }} ({{ selectedStatus }})</h3>
+      <button class="close-btn" (click)="closeTaskDrawer()">✖</button>
     </div>
+
+    <input type="text" [(ngModel)]="newTaskTitle" placeholder="Task Title" class="task-input" />
+    <textarea [(ngModel)]="newTaskDescription" placeholder="Task Description" class="task-input"></textarea>
+
+    <select [(ngModel)]="selectedStatus" class="task-select">
+      <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>
+    </select>
+
+    <select [(ngModel)]="newTaskPriority" class="task-select">
+      <option [ngValue]="null" disabled selected>Priority</option>
+      <option [ngValue]="'Low'">Low</option>
+      <option [ngValue]="'Medium'">Medium</option>
+      <option [ngValue]="'High'">High</option>
+    </select>
+
+    <button class="add-task-btn" (click)="addTask()">➕ {{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }}</button>
   </div>
 </div>
