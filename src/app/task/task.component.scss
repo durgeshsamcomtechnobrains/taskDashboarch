@@ -8,6 +8,7 @@
   flex-direction: column;
   gap: 8px;
   cursor: grab;
+  width: 90%;
 
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -16,25 +17,50 @@
 
 .task-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.task-header h3 {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .task-actions {
   display: flex;
   gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
 
-  button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+.task-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
 .task-desc {
   font-size: 14px;
   color: #555;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 
 .task-footer {
