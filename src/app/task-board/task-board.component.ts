@@ -9,11 +9,12 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { ITask } from '../interface/ITask';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, TaskComponent, DragDropModule],
+  imports: [CommonModule, FormsModule, TaskComponent, DragDropModule, MatIconModule],
   templateUrl: './task-board.component.html',
   styleUrl: './task-board.component.scss',
 })

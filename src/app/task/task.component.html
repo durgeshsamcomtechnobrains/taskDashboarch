@@ -2,13 +2,13 @@
   <div class="task-header">
     <h3>{{ task.title }}</h3>
     <div class="task-actions">
-      <button (click)="onEdit()" title="Edit Task">✏️</button>
-      <button (click)="onDelete()" title="Delete Task">🗑️</button>
+      <mat-icon aria-hidden="false" aria-label="Edit Task" (click)="onEdit()">edit</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Delete Task" (click)="onDelete()">delete</mat-icon>
     </div>
   </div>
   <p class="task-desc">{{ task.description }}</p>
   <div class="task-footer">
     <span class="priority-label">{{ task.priority }}</span>
-    <span class="status-label">{{ task.status }}</span>
+    <!-- <span class="status-label">{{ task.status }}</span> -->
   </div>
 </div>

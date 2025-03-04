@@ -1,11 +1,13 @@
 <div class="task-board-container">
-  <button class="add-column-btn" (click)="addColumn()">➕ Add Column</button>
+    <button class="add-column-btn" (click)="addColumn()">
+      <mat-icon aria-hidden="false">add</mat-icon>
+    </button>
   <div class="board-wrapper">
     <div class="task-board">
       <div class="task-column" *ngFor="let status of statuses">
         <div class="column-header">
           <h2>{{ status }}</h2>
-          <button class="add-task-btn" (click)="openTaskDrawer(status)">➕</button>
+          <button class="add-task-btn" (click)="openTaskDrawer(status)"><mat-icon aria-hidden="false">add</mat-icon></button>
         </div>
 
         <div cdkDropList [cdkDropListData]="getTasksByStatus(status)"

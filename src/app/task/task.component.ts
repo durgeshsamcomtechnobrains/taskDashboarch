@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ITask } from '../interface/ITask';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-task',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
