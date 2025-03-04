@@ -10,6 +10,7 @@ $hover-secondary: #218838;
   padding: 16px;
 
   .add-column-btn {
+    font-family: 'Inter', Arial, sans-serif;
     position: absolute;
     top: 0;
     right: 30px;
@@ -48,6 +49,7 @@ $hover-secondary: #218838;
 }
 
 .task-column {
+  font-family: 'Inter', Arial, sans-serif;
   background: #f4f4f4;
   border-radius: 8px;
   padding: 16px;
@@ -60,6 +62,7 @@ $hover-secondary: #218838;
   flex-shrink: 0;
 
   .column-header {
+    font-family: 'Inter', Arial, sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -77,6 +80,7 @@ $hover-secondary: #218838;
 }
 
 .task-list {
+  font-family: 'Inter', Arial, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -98,6 +102,7 @@ $hover-secondary: #218838;
 }
 
 .add-task-btn {
+  font-family: 'Inter', Arial, sans-serif;
   background: $secondary-color;
   color: white;
   padding: 8px;
@@ -113,6 +118,7 @@ $hover-secondary: #218838;
 }
 
 .task-drawer {
+  font-family: 'Inter', Arial, sans-serif;
   position: fixed;
   top: 0;
   right: -350px;

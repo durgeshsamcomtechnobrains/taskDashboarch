@@ -1,21 +1,23 @@
 .task-card {
+  font-family: 'Inter', Arial, sans-serif;
   background: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
   transition: 0.3s;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   cursor: grab;
   width: 90%;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.18);
   }
 }
 
 .task-header {
+  font-family: 'Inter', Arial, sans-serif;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -28,17 +30,18 @@
 .task-header h3 {
   flex: 1;
   margin: 0;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 600;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: #222;
 }
 
 .task-actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
   flex-shrink: 0;
 }
@@ -47,18 +50,20 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
-  padding: 4px;
+  font-size: 20px;
+  padding: 5px;
   transition: transform 0.2s ease-in-out;
+  color: #444;
 
   &:hover {
     transform: scale(1.1);
+    color: #000;
   }
 }
 
 .task-desc {
-  font-size: 14px;
-  color: #555;
+  font-size: 15px;
+  color: #444;
   word-wrap: break-word;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -68,8 +73,8 @@
 .task-footer {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .priority-label {
@@ -87,5 +92,96 @@
 }
 
 .status-label {
-  color: #666;
+  color: #555;
 }
+
+// .task-card {
+//   background: #fff;
+//   border-radius: 8px;
+//   padding: 12px;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+//   transition: 0.3s;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 8px;
+//   cursor: grab;
+//   width: 90%;
+
+//   &:hover {
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+//   }
+// }
+
+// .task-header {
+//   display: flex;flex-wrap: wrap;
+//   justify-content: space-between;
+//   align-items: center;
+//   gap: 12px;
+//   word-break: break-word;
+//   overflow-wrap: break-word;
+// }
+
+// .task-header h3 {
+//   flex: 1;
+//   margin: 0;
+//   font-size: 16px;
+//   font-weight: bold;
+//   min-width: 0;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+// }
+
+// .task-actions {
+//   display: flex;
+//   gap: 8px;
+//   align-items: center;
+//   flex-shrink: 0;
+// }
+
+// .task-actions button {
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   font-size: 18px;
+//   padding: 4px;
+//   transition: transform 0.2s ease-in-out;
+
+//   &:hover {
+//     transform: scale(1.1);
+//   }
+// }
+
+// .task-desc {
+//   font-size: 14px;
+//   color: #555;
+//   word-wrap: break-word;
+//   word-break: break-word;
+//   overflow-wrap: break-word;
+//   white-space: normal;
+// }
+
+// .task-footer {
+//   display: flex;
+//   justify-content: space-between;
+//   font-size: 12px;
+//   font-weight: bold;
+// }
+
+// .priority-label {
+//   &.low {
+//     color: green;
+//   }
+
+//   &.medium {
+//     color: orange;
+//   }
+
+//   &.high {
+//     color: red;
+//   }
+// }
+
+// .status-label {
+//   color: #666;
+// }
