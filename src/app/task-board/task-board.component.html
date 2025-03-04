@@ -3,8 +3,8 @@
       <mat-icon aria-hidden="false">add</mat-icon>
     </button>
   <div class="board-wrapper">
-    <div class="task-board">
-      <div class="task-column" *ngFor="let status of statuses">
+    <div class="task-board" cdkDropList [cdkDropListData]="statuses" (cdkDropListDropped)="onColumnDrop($event)">
+      <div class="task-column" *ngFor="let status of statuses" cdkDrag>
         <div class="column-header">
           <h2>{{ status }}</h2>
           <button class="add-task-btn" (click)="openTaskDrawer(status)"><mat-icon aria-hidden="false">add</mat-icon></button>
@@ -43,6 +43,7 @@
       <option [ngValue]="'High'">High</option>
     </select>
 
-    <button class="add-task-btn" (click)="addTask()">➕ {{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }}</button>
+    <!-- <button class="add-task-btn" (click)="addTask()">➕ {{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }}</button> -->
+    <button class="add-task-btn" (click)="addTask()"><mat-icon aria-hidden="false">add</mat-icon></button>
   </div>
 </div>

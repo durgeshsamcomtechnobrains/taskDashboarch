@@ -69,6 +69,30 @@ export class TaskBoardComponent {
     return this.tasks.filter((task) => task.status === status);
   }
 
+  onColumnDrop(event: CdkDragDrop<ITask['status'][]>) {
+    moveItemInArray(this.statuses, event.previousIndex, event.currentIndex);
+    this.saveColumnOrder();
+  }
+
+  saveColumnOrder() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('columnOrder', JSON.stringify(this.statuses));
+    }
+  }
+
+  loadColumnOrder() {
+    if (typeof localStorage !== 'undefined') {
+      const savedOrder = localStorage.getItem('columnOrder');
+      if (savedOrder) {
+        this.statuses = JSON.parse(savedOrder);
+      }
+    }
+  }
+
+  ngOnInit() {
+    this.loadColumnOrder();
+  }
+
   editingTaskId: number | null = null;
 
   onEditTask(taskId: number) {
