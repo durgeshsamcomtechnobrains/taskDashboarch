@@ -5,7 +5,7 @@
       <div class="task-column" *ngFor="let status of statuses">
         <div class="column-header">
           <h2>{{ status }}</h2>
-          <button class="add-task-btn" (click)="openTaskDrawer(status)">➕ Add Task</button>
+          <button class="add-task-btn" (click)="openTaskDrawer(status)">➕</button>
         </div>
 
         <div cdkDropList [cdkDropListData]="getTasksByStatus(status)"

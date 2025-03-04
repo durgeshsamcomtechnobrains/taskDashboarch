@@ -60,7 +60,9 @@
   font-size: 14px;
   color: #555;
   word-wrap: break-word;
-  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .task-footer {

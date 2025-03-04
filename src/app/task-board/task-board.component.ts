@@ -86,7 +86,7 @@ export class TaskBoardComponent {
     this.tasks = this.tasks.filter((task) => task.id !== taskId);
   }
 
-  onDrop(event: CdkDragDrop<ITask[]>, newStatus: ITask['status']) {
+    onDrop(event: CdkDragDrop<ITask[]>, newStatus: ITask['status']) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
