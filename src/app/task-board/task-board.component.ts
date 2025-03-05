@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskComponent } from '../task/task.component';
@@ -10,6 +10,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ITask } from '../interface/ITask';
 import { MatIconModule } from '@angular/material/icon';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-task-board',
@@ -18,12 +19,20 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './task-board.component.html',
   styleUrl: './task-board.component.scss',
 })
-export class TaskBoardComponent {
+export class TaskBoardComponent implements OnInit {
   isDrawerOpen = false;
   newTaskTitle: string = '';
   newTaskDescription: string = '';
   newTaskPriority: ITask['priority'] | null = null;
   selectedStatus: ITask['status'] = 'To Do';
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() {
+    this.loadColumnOrder();
+    this.tasks = this.taskService.getTasks();
+  }
+
   statuses: ITask['status'][] = [ 'Backlog','To Do','In Progress','Paused','Done',];
   tasks: ITask[] = [
     {
@@ -102,9 +111,6 @@ export class TaskBoardComponent {
     }
   }
 
-  ngOnInit() {
-    this.loadColumnOrder();
-  }
 
   editingTaskId: number | null = null;
 

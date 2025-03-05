@@ -1,12 +1,12 @@
-<div class="task-card" [ngClass]="getPriorityClass(task.priority)">
+<div class="task-card" [ngClass]="getPriorityClass(task.priority)" (click)="openDrawer()">
   <div class="task-header">
     <h3>{{ task.title }}</h3>
     <div class="task-actions">
-      <mat-icon aria-hidden="false" aria-label="Edit Task" (click)="onEdit()">edit</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Edit Task" (click)="onEdit($event)">edit</mat-icon>
       <mat-icon aria-hidden="false" aria-label="Delete Task" (click)="onDelete()">delete</mat-icon>
     </div>
   </div>
-  <p class="task-desc">{{ task.description }}</p>
+  <p class="task-desc" [innerHTML]="task.description">{{ task.description }}</p>
   <div class="task-footer">
     <span class="priority-label">{{ task.priority }}</span>
     <!-- <span class="status-label">{{ task.status }}</span> -->

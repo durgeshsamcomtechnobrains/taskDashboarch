@@ -1,0 +1,148 @@
+.task-details {
+  margin-top: 25px;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+
+  .title-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+
+    .title-content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+        word-break: break-word;
+      }
+      .title-input {
+        width: 100%;
+        font-size: 18px;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    }
+
+    .edit-btn {
+      cursor: pointer;
+      font-size: 24px;
+      color: black;
+      transition: 0.3s;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 480px) {
+    .title-section {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .title-content {
+        width: 100%;
+      }
+
+      .edit-btn {
+        align-self: flex-end;
+        margin-top: 5px;
+      }
+    }
+  }
+
+  .description-section {
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+
+    .desc-input {
+      width: 100%;
+      min-height: 100px;
+      padding: 0px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  }
+
+  .priority-status {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .priority {
+      background: #ffcc00;
+      color: #333;
+    }
+
+    .status {
+      background: #17a2b8;
+      color: white;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    gap: 10px;
+
+    .save-btn,
+    .cancel-btn {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .save-btn {
+      background: #28a745;
+      color: white;
+
+      &:hover {
+        background: #218838;
+      }
+    }
+
+    .cancel-btn {
+      background: #dc3545;
+      color: white;
+
+      &:hover {
+        background: #c82333;
+      }
+    }
+  }
+}
+
+angular-editor {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: white;
+  padding: 5px;
+}

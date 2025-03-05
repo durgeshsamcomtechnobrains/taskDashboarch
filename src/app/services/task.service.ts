@@ -1,33 +1,50 @@
 import { Injectable } from '@angular/core';
 import { ITask } from '../interface/ITask';
 import { IStatus } from '../interface/IStatus';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private tasksUrl = 'assets/tasks.json';
-  private statusesUrl = 'assets/statuses.json';
-  private tasks: ITask[] = [];
-  private istatus: IStatus[] = [];
+  private tasksSource = new BehaviorSubject<ITask[]>([
+    {
+      id: 1,
+      title: 'Task Management Dashboard',
+      description: 'Build UI for task board',
+      priority: 'High',
+      status: 'To Do',
+    },
+    {
+      id: 2,
+      title: 'Fix API Integration',
+      description: 'Resolve API errors',
+      priority: 'Medium',
+      status: 'In Progress',
+    },
+    {
+      id: 3,
+      title: 'Add Sorting & Filtering',
+      description: 'Implement sorting & filters',
+      priority: 'Low',
+      status: 'Backlog',
+    },
+  ]);
 
-  constructor(private http: HttpClient) {}
+  tasks$ = this.tasksSource.asObservable();
 
-  getTasks(): Observable<ITask[]> {
-    return this.http.get<ITask[]>(this.tasksUrl);
+  constructor() {}
+
+  getTasks(): ITask[] {
+    return this.tasksSource.getValue();
   }
 
-  getStatuses(): Observable<IStatus[]> {
-    return this.http.get<IStatus[]>(this.statusesUrl);
+  getTaskById(taskId: number): ITask | undefined {
+    return this.getTasks().find(task => task.id === taskId);
   }
 
-  // updateTask(updatedTask: ITask): Observable<ITask> {
-  //   const index = this.tasks.findIndex(task => task.id === updatedTask.id);
-  //   if (index !== -1) {
-  //     this.tasks[index] = updatedTask;
-  //   }
-  //   return of(updatedTask);
-  // }
+  updateTasks(newTasks: ITask[]) {
+    this.tasksSource.next(newTasks);
+  }
 }
