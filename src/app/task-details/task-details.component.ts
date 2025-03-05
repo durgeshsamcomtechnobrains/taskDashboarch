@@ -29,7 +29,7 @@ export class TaskDetailsComponent {
 
   task: ITask | undefined;
   isEditing: boolean = false;
-
+  previewUrl: string | null = null;
   editorConfig = {
     editable: true,
     spellcheck: true,
@@ -81,5 +81,57 @@ export class TaskDetailsComponent {
 
   cancelEdit() {
     this.isEditing = false;
+  }
+
+  updateDescriptionWithAttachments() {
+    if (!this.task || !this.task.description) return;
+    this.task.description = this.task.description.replace(/<br\/><strong>Attached Images:<\/strong>.*<\/ul>/s, '');
+    if (!this.task.attachments || this.task.attachments.length === 0) return;
+    const imageFiles = this.task.attachments.filter(file => file.type?.startsWith('image/'));
+    if (imageFiles.length > 0) {
+      const imageList = imageFiles.map(file => `<li>${file.name}</li>`).join('');
+      this.task.description += `<br/><strong>Attached Images:</strong><ul>${imageList}</ul>`;
+    }
+  }
+
+  onFileSelected(event: any) {
+    const files = Array.from(event.target.files) as File[];
+    if (this.task) {
+      this.task.attachments = [...(this.task.attachments || []), ...files];
+      this.updateDescriptionWithAttachments();
+    }
+  }
+
+  removeAttachment(fileToRemove: File) {
+    if (this.task) {
+      this.task.attachments = this.task.attachments?.filter(file => file !== fileToRemove);
+      this.updateDescriptionWithAttachments();
+    }
+  }
+
+  showPreview(file: File) {
+    if (file.type.startsWith('image/')) {
+      this.previewUrl = URL.createObjectURL(file);
+    }
+  }
+
+  hidePreview() {
+    this.previewUrl = null;
+  }
+
+  downloadFile(file: File) {
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  openFile(file: File, event: Event) {
+    event.preventDefault();
+    const url = URL.createObjectURL(file);
+    window.open(url, '_blank');
   }
 }

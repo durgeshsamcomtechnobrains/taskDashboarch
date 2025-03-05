@@ -4,4 +4,5 @@ export interface ITask {
   description: string;
   priority: 'Low' | 'Medium' | 'High';
   status: 'Backlog' | 'To Do' | 'In Progress' | 'Paused' | 'Done';
+  attachments?: File[];
 }

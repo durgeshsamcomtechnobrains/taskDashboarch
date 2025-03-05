@@ -144,3 +144,100 @@ angular-editor {
   background: white;
   padding: 0px;
 }
+
+.attachments-section {
+  margin-top: 15px;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+
+  input {
+    margin-top: 5px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    position: relative;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        cursor: pointer;
+        flex-grow: 1;
+      }
+
+      .icons {
+        display: flex;
+        gap: 12px;
+      }
+
+      mat-icon {
+        cursor: pointer;
+        font-size: 20px;
+        transition: 0.3s;
+
+        &.download-icon {
+          color: green;
+        }
+
+        &.delete-icon {
+          color: red;
+        }
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
+
+.image-preview {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 500px;
+  max-height: 500px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 10;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+

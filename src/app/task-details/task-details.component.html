@@ -10,6 +10,26 @@
 
   <div class="description-section">
     <p *ngIf="!isEditing" [innerHTML]="task.description"></p>
+
+    <div *ngIf="isEditing" class="attachments-section">
+      <strong>Attachments:</strong>
+      <input type="file" multiple (change)="onFileSelected($event)" />
+
+      <ul *ngIf="task.attachments?.length">
+        <li *ngFor="let file of task.attachments">
+          <a href="#" (click)="openFile(file, $event)" (mouseenter)="showPreview(file)" (mouseleave)="hidePreview()">
+            {{ file.name }}
+          </a>
+          <div class="icons">
+            <mat-icon class="download-icon" (click)="downloadFile(file)">download</mat-icon>
+            <mat-icon class="delete-icon" (click)="removeAttachment(file)">delete</mat-icon>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="image-preview" *ngIf="previewUrl">
+      <img [src]="previewUrl" alt="Preview Image" />
+    </div>
     <angular-editor *ngIf="isEditing" [(ngModel)]="task.description" [config]="editorConfig"></angular-editor>
   </div>
 
