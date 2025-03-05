@@ -37,7 +37,7 @@
     </div>
 
     <input type="text" [(ngModel)]="newTaskTitle" placeholder="Task Title" class="task-input" />
-    <textarea [(ngModel)]="newTaskDescription" placeholder="Task Description" class="task-input"></textarea>
+    <angular-editor placeholder="Task Description" class="task-input" [(ngModel)]="newTaskDescription" [config]="editorConfig"></angular-editor>
 
     <select [(ngModel)]="selectedStatus" class="task-select">
       <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>

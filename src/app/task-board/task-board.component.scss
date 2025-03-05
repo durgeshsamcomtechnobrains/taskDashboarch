@@ -293,3 +293,16 @@ textarea.task-input {
   height: 60px;
   resize: none;
 }
+
+// If show the Editor icons for angular editor just comment this below css
+// Start
+::ng-deep angular-editor-toolbar {
+  display: none !important;
+}
+
+::ng-deep .angular-editor {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+// End

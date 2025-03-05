@@ -1,10 +1,10 @@
 .task-details {
   margin-top: 25px;
-  max-width: 600px;
+  max-width: 70%;
   margin: auto;
   padding: 20px;
   border-radius: 10px;
-  background: #ffffff;
+  background-color: #dbd6d6; margin-top: 50px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 
@@ -29,7 +29,7 @@
         word-break: break-word;
       }
       .title-input {
-        width: 100%;
+        width: 98%;
         font-size: 18px;
         padding: 6px;
         border: 1px solid #ccc;
@@ -94,13 +94,11 @@
     }
 
     .priority {
-      background: #ffcc00;
-      color: #333;
+      color: hsl(17.13deg 80% 45%);
     }
 
     .status {
-      background: #17a2b8;
-      color: white;
+      color: blue;
     }
   }
 
@@ -144,5 +142,5 @@ angular-editor {
   border: 1px solid #ccc;
   border-radius: 5px;
   background: white;
-  padding: 5px;
+  padding: 0px;
 }

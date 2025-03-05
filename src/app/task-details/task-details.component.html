@@ -40,35 +40,3 @@
 <div *ngIf="!task" class="no-task">
   <p>No task found.</p>
 </div>
-
-<!-- <div class="task-details" *ngIf="task">
-  <div class="title-section">
-    <div class="title-content">
-      <h2 *ngIf="!isEditing">{{ task.title }}</h2>
-      <input *ngIf="isEditing" type="text" [(ngModel)]="task.title" class="title-input" />
-    </div>
-
-    <button class="edit-btn" (click)="toggleEditMode()">
-      <i class="fa fa-pencil"></i>
-    </button>
-  </div>
-
-  <div class="description-section">
-    <p *ngIf="!isEditing">{{ task.description }}</p>
-    <textarea *ngIf="isEditing" [(ngModel)]="task.description" class="desc-input"></textarea>
-  </div>
-
-  <div class="priority-status">
-    <span class="badge priority" [ngClass]="task.priority.toLowerCase()">{{ task.priority }}</span>
-    <span class="badge status">{{ task.status }}</span>
-  </div>
-
-  <div class="actions" *ngIf="isEditing">
-    <button class="save-btn" (click)="saveChanges()">Save</button>
-    <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
-  </div>
-</div>
-
-<div *ngIf="!task" class="no-task">
-  <p>No task found.</p>
-</div> -->

@@ -11,11 +11,21 @@ import {
 import { ITask } from '../interface/ITask';
 import { MatIconModule } from '@angular/material/icon';
 import { TaskService } from '../services/task.service';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, TaskComponent, DragDropModule, MatIconModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TaskComponent,
+    DragDropModule,
+    MatIconModule,
+    AngularEditorModule,
+    HttpClientModule
+  ],
   templateUrl: './task-board.component.html',
   styleUrl: './task-board.component.scss',
 })
@@ -57,6 +67,18 @@ export class TaskBoardComponent implements OnInit {
       status: 'Backlog',
     },
   ];
+
+  editorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '200px',
+    minHeight: '100px',
+    placeholder: 'Task Description',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [['subscript', 'superscript']],
+  };
 
   openTaskDrawer(status: string) {
     this.selectedStatus = status as ITask['status'];

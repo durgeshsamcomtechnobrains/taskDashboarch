@@ -7,6 +7,9 @@ import { ITask } from '../interface/ITask';
 import { MatIconModule } from '@angular/material/icon';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-task-details',
@@ -16,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     MatIconModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatFormFieldModule
   ],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.scss'
@@ -35,14 +39,26 @@ export class TaskDetailsComponent {
     translate: 'no',
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
-    toolbarHiddenButtons: [['strikeThrough', 'subscript', 'superscript']]
+    toolbarHiddenButtons: [['strikeThrough', 'subscript', 'superscript']],
+    sanitize: false,
+    customClasses: [
+      {
+        name: 'custom-image',
+        class: 'custom-img',
+        tag: 'img'
+      }
+    ]
   };
 
 
   priorities: string[] = ['Low', 'Medium', 'High'];
   statuses: string[] = ['Backlog', 'To Do', 'In Progress', 'Paused', 'Done'];
 
-  constructor(private route: ActivatedRoute, private taskService: TaskService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -60,6 +76,7 @@ export class TaskDetailsComponent {
       this.taskService.updateTasks([...this.taskService.getTasks()]);
       this.isEditing = false;
     }
+    this.router.navigate(['',]);
   }
 
   cancelEdit() {
