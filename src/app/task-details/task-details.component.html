@@ -27,9 +27,13 @@
         </li>
       </ul>
     </div>
-    <div class="image-preview" *ngIf="previewUrl">
-      <img [src]="previewUrl" alt="Preview Image" />
+    <div *ngIf="previewUrl" class="image-preview">
+      <img *ngIf="previewType === 'image' || previewType === 'video-thumbnail'" [src]="previewUrl" alt="Preview" />
+      <div *ngIf="previewType === 'video-thumbnail'" class="video-placeholder">
+        <p>To watch this video, please download it.</p>
+      </div>
     </div>
+
     <angular-editor *ngIf="isEditing" [(ngModel)]="task.description" [config]="editorConfig"></angular-editor>
   </div>
 

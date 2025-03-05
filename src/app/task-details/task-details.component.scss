@@ -224,10 +224,10 @@ angular-editor {
   z-index: 10;
 
   img {
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 5px;
-  }
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 5px;
+}
 }
 
 @keyframes fadeIn {
@@ -241,3 +241,16 @@ angular-editor {
   }
 }
 
+
+.video-placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  text-align: center;
+}

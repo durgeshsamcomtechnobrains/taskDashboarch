@@ -30,6 +30,7 @@ export class TaskDetailsComponent {
   task: ITask | undefined;
   isEditing: boolean = false;
   previewUrl: string | null = null;
+  previewType: 'video' | 'image' | 'file' | 'video-thumbnail' | null = null;
   editorConfig = {
     editable: true,
     spellcheck: true,
@@ -85,13 +86,34 @@ export class TaskDetailsComponent {
 
   updateDescriptionWithAttachments() {
     if (!this.task || !this.task.description) return;
-    this.task.description = this.task.description.replace(/<br\/><strong>Attached Images:<\/strong>.*<\/ul>/s, '');
+    this.task.description = this.task.description
+      .replace(/<br\/><strong>Attached Images:<\/strong>.*?<\/ul>/s, '')
+      .replace(/<br\/><strong>Attached Videos:<\/strong>.*?<\/ul>/s, '')
+      .replace(/<br\/><strong>Attached Files:<\/strong>.*?<\/ul>/s, '');
+
     if (!this.task.attachments || this.task.attachments.length === 0) return;
+
     const imageFiles = this.task.attachments.filter(file => file.type?.startsWith('image/'));
+    const videoFiles = this.task.attachments.filter(file => file.type?.startsWith('video/'));
+    const otherFiles = this.task.attachments.filter(file => !file.type?.startsWith('image/') && !file.type?.startsWith('video/'));
+
+    let updatedDescription = this.task.description;
+
     if (imageFiles.length > 0) {
       const imageList = imageFiles.map(file => `<li>${file.name}</li>`).join('');
-      this.task.description += `<br/><strong>Attached Images:</strong><ul>${imageList}</ul>`;
+      updatedDescription += `<br/><strong>Attached Images:</strong><ul>${imageList}</ul>`;
     }
+
+    if (videoFiles.length > 0) {
+      const videoList = videoFiles.map(file => `<li>${file.name}</li>`).join('');
+      updatedDescription += `<br/><strong>Attached Videos:</strong><ul>${videoList}</ul>`;
+    }
+
+    if (otherFiles.length > 0) {
+      const fileList = otherFiles.map(file => `<li>${file.name}</li>`).join('');
+      updatedDescription += `<br/><strong>Attached Files:</strong><ul>${fileList}</ul>`;
+    }
+    this.task.description = updatedDescription;
   }
 
   onFileSelected(event: any) {
@@ -112,11 +134,47 @@ export class TaskDetailsComponent {
   showPreview(file: File) {
     if (file.type.startsWith('image/')) {
       this.previewUrl = URL.createObjectURL(file);
+      this.previewType = 'image';
+    } else if (file.type.startsWith('video/')) {
+      this.generateVideoThumbnail(file);
+    } else {
+      this.previewUrl = null;
+      this.previewType = 'file';
     }
+  }
+
+  generateVideoThumbnail(file: File) {
+    const video = document.createElement('video');
+    video.src = URL.createObjectURL(file);
+    video.muted = true;
+    video.autoplay = false;
+    video.playsInline = true;
+
+    video.addEventListener('loadeddata', () => {
+      video.currentTime = 1;
+    });
+
+    video.addEventListener('seeked', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth / 2 || 160;
+      canvas.height = video.videoHeight / 2 || 90;
+      const ctx = canvas.getContext('2d');
+
+      if (ctx) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        this.previewUrl = canvas.toDataURL('image/png');
+        this.previewType = 'video-thumbnail';
+      }
+
+      URL.revokeObjectURL(video.src);
+    });
+
+    video.load();
   }
 
   hidePreview() {
     this.previewUrl = null;
+    this.previewType = null;
   }
 
   downloadFile(file: File) {
