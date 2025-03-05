@@ -131,6 +131,7 @@ $hover-secondary: #218838;
 .task-list::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 .add-task-panel {
   width: 250px;
   padding: 16px;
@@ -146,20 +147,36 @@ $hover-secondary: #218838;
   }
 }
 
-.add-task-btn {
-  font-family: 'Inter', Arial, sans-serif;
-  // background: $secondary-color;
-  color: black;
-  //padding: 8px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s;
+.task-action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 
-  // &:hover {
-  //   background: $hover-secondary;
-  // }
+  .add-task-btn {
+    font-family: 'Inter', Arial, sans-serif;
+  // background: $secondary-color;
+    color: black;
+  //padding: 8px;
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    mat-icon {
+      font-size: 20px;
+    }
+
+    &:hover {
+      background: $hover-primary;
+    }
+  }
 }
 
 .task-drawer {
@@ -193,11 +210,46 @@ $hover-secondary: #218838;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 
   h3 {
     font-size: 18px;
     font-weight: bold;
     color: #333;
+  }
+
+  .header-buttons {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.header-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.duplicate-task-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: background 0.2s;
+
+  mat-icon {
+    font-size: 20px;
+    color: #007bff;
+  }
+
+  &:hover {
+    background: rgba(0, 123, 255, 0.1);
   }
 }
 

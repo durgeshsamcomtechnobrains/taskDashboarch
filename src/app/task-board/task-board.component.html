@@ -26,7 +26,14 @@
   <div class="task-drawer-content">
     <div class="drawer-header">
       <h3>{{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }} ({{ selectedStatus }})</h3>
-      <button class="close-btn" (click)="closeTaskDrawer()">✖</button>
+      <div class="header-buttons">
+        <button class="duplicate-task-btn" (click)="DuplicateTask()">
+          <mat-icon aria-hidden="false">content_copy</mat-icon>
+        </button>
+        <button class="close-btn" (click)="closeTaskDrawer()">
+          <mat-icon aria-hidden="false">close</mat-icon>
+        </button>
+      </div>
     </div>
 
     <input type="text" [(ngModel)]="newTaskTitle" placeholder="Task Title" class="task-input" />
@@ -44,6 +51,9 @@
     </select>
 
     <!-- <button class="add-task-btn" (click)="addTask()">➕ {{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }}</button> -->
-    <button class="add-task-btn" (click)="addTask()"><mat-icon aria-hidden="false">add</mat-icon></button>
+    <div class="task-action-buttons">
+      <button class="add-task-btn" (click)="addTask()">
+        <mat-icon aria-hidden="false">add</mat-icon>
+      </button>
   </div>
 </div>

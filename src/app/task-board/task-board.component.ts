@@ -58,6 +58,19 @@ export class TaskBoardComponent {
     this.editingTaskId = null;
   }
 
+  DuplicateTask() {
+    if (this.editingTaskId !== null) {
+      const taskToDuplicate = this.tasks.find(task => task.id === this.editingTaskId);
+      if (taskToDuplicate) {
+        const newTask: ITask = {
+          ...taskToDuplicate,
+          id: this.tasks.length + 1,
+        };
+        this.tasks.push(newTask);
+      }
+    }
+  }
+
   closeTaskDrawer() {
     this.newTaskTitle = '';
     this.newTaskDescription = '';
