@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { ITask } from '../interface/ITask';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-task',
@@ -19,13 +20,21 @@ export class TaskComponent {
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
   priorityClass: string = '';
-
-  constructor(private router: Router) {}
+  sanitizedDescription!: SafeHtml;
+  constructor(
+    private router: Router,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['task'] && this.task) {
       this.priorityClass = this.getPriorityClass(this.task.priority);
+      this.sanitizedDescription = this.sanitizeHtml(this.task.description);
     }
+  }
+
+  sanitizeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   getPriorityClass(priority: string): string {

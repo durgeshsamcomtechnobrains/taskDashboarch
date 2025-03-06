@@ -6,7 +6,8 @@
       <mat-icon aria-hidden="false" aria-label="Delete Task" (click)="onDelete()">delete</mat-icon>
     </div>
   </div>
-  <p class="task-desc" [innerHTML]="task.description">{{ task.description }}</p>
+  <!-- <p class="task-desc" [innerHTML]="task.description">{{ task.description }}</p> -->
+  <p class="task-desc" [innerHTML]="sanitizedDescription"></p>
   <div class="task-footer">
     <span class="priority-label">{{ task.priority }}</span>
     <!-- <span class="status-label">{{ task.status }}</span> -->

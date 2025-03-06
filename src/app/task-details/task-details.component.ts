@@ -28,6 +28,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 export class TaskDetailsComponent {
 
   task: ITask | undefined;
+  taskId: number | null = null;
   isEditing: boolean = false;
   previewUrl: string | null = null;
   previewType: 'video' | 'image' | 'file' | 'video-thumbnail' | null = null;
@@ -63,9 +64,22 @@ export class TaskDetailsComponent {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const taskId = Number(params.get('id'));
-      this.task = this.taskService.getTaskById(taskId);
+      this.taskId = Number(params.get('id'));
+      if (!isNaN(this.taskId)) {
+        this.fetchTask(this.taskId);
+      } else {
+        console.error('Invalid task ID');
+      }
     });
+  }
+
+  fetchTask(taskId: number) {
+    this.taskService.getTaskById(taskId).subscribe(
+      (task) => {
+        this.task = task;
+      },
+      (error) => console.error('Error fetching task:', error)
+    );
   }
 
   toggleEditMode() {
@@ -74,10 +88,13 @@ export class TaskDetailsComponent {
 
   saveChanges() {
     if (this.task) {
-      this.taskService.updateTasks([...this.taskService.getTasks()]);
-      this.isEditing = false;
+      this.taskService.updateTask1(this.task).subscribe(
+        () => {
+          this.isEditing = false;
+        },
+        (error) => console.error('Error updating task:', error)
+      );
     }
-    this.router.navigate(['',]);
   }
 
   cancelEdit() {
@@ -117,16 +134,23 @@ export class TaskDetailsComponent {
   }
 
   onFileSelected(event: any) {
-    const files = Array.from(event.target.files) as File[];
-    if (this.task) {
-      this.task.attachments = [...(this.task.attachments || []), ...files];
-      this.updateDescriptionWithAttachments();
-    }
+  const files = Array.from(event.target.files) as File[];
+  if (this.task) {
+    const existingFiles = this.task.attachments || [];
+    this.task.attachments = [...existingFiles, ...files].reduce((acc, file) => {
+      if (!acc.some(f => f.name === file.name && f.size === file.size)) {
+        acc.push(file);
+      }
+      return acc;
+    }, [] as File[]);
+    this.updateDescriptionWithAttachments();
   }
+}
 
   removeAttachment(fileToRemove: File) {
     if (this.task) {
       this.task.attachments = this.task.attachments?.filter(file => file !== fileToRemove);
+      console.log('Attachments after removal:', this.task.attachments);
       this.updateDescriptionWithAttachments();
     }
   }

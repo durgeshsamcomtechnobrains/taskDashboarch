@@ -1,9 +1,0 @@
-{
-  "statuses": [
-    { "id": 1, "name": "Backlog" },
-    { "id": 2, "name": "To Do" },
-    { "id": 3, "name": "In Progress" },
-    { "id": 4, "name": "Paused" },
-    { "id": 5, "name": "Done" }
-  ]
-}

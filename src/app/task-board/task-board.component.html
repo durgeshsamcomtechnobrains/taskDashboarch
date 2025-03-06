@@ -3,20 +3,21 @@
       <mat-icon aria-hidden="false">add</mat-icon>
     </button>
   <div class="board-wrapper">
-    <div class="task-board" cdkDropList [cdkDropListData]="statuses" (cdkDropListDropped)="onColumnDrop($event)">
-      <div class="task-column" *ngFor="let status of statuses" cdkDrag>
+    <div class="task-board" cdkDropList [cdkDropListData]="statuses2">
+      <div class="task-column" *ngFor="let status of statuses2" cdkDrag>
         <div class="column-header">
-          <h2>{{ status }}</h2>
-          <button class="add-task-btn" (click)="openTaskDrawer(status)"><mat-icon aria-hidden="false">add</mat-icon></button>
+          <h2>{{ status.name }}</h2>
+          <button class="add-task-btn" (click)="openTaskDrawer(status.name)"><mat-icon aria-hidden="false">add</mat-icon></button>
         </div>
 
-        <div cdkDropList [cdkDropListData]="statusTasksMap[status]"
-             (cdkDropListDropped)="onDrop($event, status)" class="task-list">
-            <app-task *ngFor="let task of statusTasksMap[status]; trackBy: trackByTaskId"
-                    [task]="task"
-                    (edit)="onEditTask($event)"
-                    (delete)="onDeleteTask($event)" cdkDrag>
-          </app-task>
+        <div cdkDropList [cdkDropListData]="statusTasksMap[status.name]"
+            (cdkDropListDropped)="onDrop($event, status.name)"
+            class="task-list">
+            <app-task *ngFor="let task of statusTasksMap[status.name]; trackBy: trackByTaskId"
+              [task]="task"
+              (edit)="onEditTask($event)"
+              (delete)="onDeleteTask($event)" cdkDrag>
+            </app-task>
         </div>
       </div>
     </div>
@@ -25,7 +26,7 @@
 <div class="task-drawer" [ngClass]="{ 'open': isDrawerOpen }">
   <div class="task-drawer-content">
     <div class="drawer-header">
-      <h3>{{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }} ({{ selectedStatus }})</h3>
+      <h3>{{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }} - {{ selectedStatus }}</h3>
       <div class="header-buttons">
         <button class="duplicate-task-btn" (click)="DuplicateTask()">
           <mat-icon aria-hidden="false">content_copy</mat-icon>
@@ -40,7 +41,8 @@
     <angular-editor placeholder="Task Description" class="task-input" [(ngModel)]="newTaskDescription" [config]="editorConfig"></angular-editor>
 
     <select [(ngModel)]="selectedStatus" class="task-select">
-      <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>
+      <option [ngValue]="null" disabled selected>SelectTaskStatus</option>
+      <option *ngFor="let status of statuses2" [ngValue]="status">{{ status.name }}</option>
     </select>
 
     <select [(ngModel)]="newTaskPriority" class="task-select">
@@ -50,7 +52,6 @@
       <option [ngValue]="'High'">High</option>
     </select>
 
-    <!-- <button class="add-task-btn" (click)="addTask()">➕ {{ editingTaskId !== null ? 'Edit Task' : 'Add Task' }}</button> -->
     <div class="task-action-buttons">
       <button class="add-task-btn" (click)="addTask()">
         <mat-icon aria-hidden="false">add</mat-icon>

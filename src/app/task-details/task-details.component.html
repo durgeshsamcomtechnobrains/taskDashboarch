@@ -10,8 +10,11 @@
     <p *ngIf="!isEditing" [innerHTML]="task.description"></p>
 
     <div *ngIf="isEditing" class="attachments-section">
-      <strong>Attachments:</strong>
-      <input type="file" multiple (change)="onFileSelected($event)" />
+      <div class="custom-file-upload">
+        <label for="fileInput">Choose Files</label>
+        <input type="file" id="fileInput" multiple (change)="onFileSelected($event)" />
+        <span *ngIf="task.attachments?.length"> {{ task.attachments?.length }} files</span>
+      </div>
 
       <ul *ngIf="task.attachments?.length">
         <li *ngFor="let file of task.attachments">

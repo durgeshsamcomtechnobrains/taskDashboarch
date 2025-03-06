@@ -1,0 +1,55 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "ABD Management Dashboard",
+      "description": "Build UI for task board",
+      "priority": "High",
+      "status": "To Do"
+    },
+    {
+      "id": "2",
+      "title": "Fix API Integration",
+      "description": "Resolve API errors",
+      "priority": "Medium",
+      "status": "In Progress"
+    },
+    {
+      "id": "3",
+      "title": "Add Sorting & Filtering",
+      "description": "Implement sorting & filters",
+      "priority": "Low",
+      "status": "Backlog"
+    },
+    {
+      "id": "4",
+      "title": "sdaf11",
+      "description": "fsd",
+      "priority": "Low",
+      "status": "Backlog",
+      "attachments": []
+    }
+  ],
+  "statuses": [
+    {
+      "id": "1",
+      "name": "Backlog"
+    },
+    {
+      "id": "2",
+      "name": "To Do"
+    },
+    {
+      "id": "3",
+      "name": "In Progress"
+    },
+    {
+      "id": "4",
+      "name": "Paused"
+    },
+    {
+      "id": "5",
+      "name": "Done"
+    }
+  ]
+}
