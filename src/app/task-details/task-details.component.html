@@ -4,7 +4,6 @@
       <h2 *ngIf="!isEditing">{{ task.title }}</h2>
       <input *ngIf="isEditing" type="text" [(ngModel)]="task.title" class="title-input" />
     </div>
-    <p>test</p>
     <mat-icon class="edit-btn" aria-hidden="false" aria-label="Edit Task" (click)="toggleEditMode()">edit</mat-icon>
   </div>
   <div class="description-section">
