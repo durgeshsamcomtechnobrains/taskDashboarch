@@ -10,9 +10,9 @@
           <button class="add-task-btn" (click)="openTaskDrawer(status)"><mat-icon aria-hidden="false">add</mat-icon></button>
         </div>
 
-        <div cdkDropList [cdkDropListData]="getTasksByStatus(status)"
+        <div cdkDropList [cdkDropListData]="statusTasksMap[status]"
              (cdkDropListDropped)="onDrop($event, status)" class="task-list">
-          <app-task *ngFor="let task of getTasksByStatus(status)"
+            <app-task *ngFor="let task of statusTasksMap[status]; trackBy: trackByTaskId"
                     [task]="task"
                     (edit)="onEditTask($event)"
                     (delete)="onDeleteTask($event)" cdkDrag>

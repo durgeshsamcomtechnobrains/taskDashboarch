@@ -1,4 +1,4 @@
-<div class="task-card" [ngClass]="getPriorityClass(task.priority)" (click)="openDrawer()">
+<div class="task-card" [ngClass]="priorityClass" (click)="openDrawer()">
   <div class="task-header">
     <h3>{{ task.title }}</h3>
     <div class="task-actions">

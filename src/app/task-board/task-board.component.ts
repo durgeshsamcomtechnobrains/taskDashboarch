@@ -35,12 +35,25 @@ export class TaskBoardComponent implements OnInit {
   newTaskDescription: string = '';
   newTaskPriority: ITask['priority'] | null = null;
   selectedStatus: ITask['status'] = 'To Do';
+  statusTasksMap: { [key: string]: ITask[] } = {};
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     this.loadColumnOrder();
     this.tasks = this.taskService.getTasks();
+    this.updateStatusTasksMap();
+  }
+
+  updateStatusTasksMap() {
+    this.statusTasksMap = {};
+    this.statuses.forEach(status => {
+      this.statusTasksMap[status] = this.tasks.filter(task => task.status === status);
+    });
+  }
+
+  trackByTaskId(index: number, task: ITask): number {
+    return task.id;
   }
 
   statuses: ITask['status'][] = [ 'Backlog','To Do','In Progress','Paused','Done',];
@@ -99,6 +112,7 @@ export class TaskBoardComponent implements OnInit {
         };
         this.tasks.push(newTask);
       }
+      this.updateStatusTasksMap();
     }
   }
 
@@ -109,9 +123,9 @@ export class TaskBoardComponent implements OnInit {
     this.isDrawerOpen = false;
   }
 
-  getTasksByStatus(status: string): ITask[] {
-    return this.tasks.filter((task) => task.status === status);
-  }
+  // getTasksByStatus(status: string): ITask[] {
+  //   return this.tasks.filter((task) => task.status === status);
+  // }
 
   onColumnDrop(event: CdkDragDrop<ITask['status'][]>) {
     moveItemInArray(this.statuses, event.previousIndex, event.currentIndex);
@@ -149,28 +163,29 @@ export class TaskBoardComponent implements OnInit {
   }
 
   onDeleteTask(taskId: number) {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+    this.updateStatusTasksMap();
   }
 
-    onDrop(event: CdkDragDrop<ITask[]>, newStatus: ITask['status']) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      const movedTask = event.previousContainer.data[event.previousIndex];
-      movedTask.status = newStatus;
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+  onDrop(event: CdkDragDrop<ITask[]>, newStatus: ITask['status']) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  } else {
+    const movedTask = event.previousContainer.data[event.previousIndex];
+    movedTask.status = newStatus;
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+    this.updateStatusTasksMap();
   }
-
+  }
   addColumn() {
     const newColumnName = prompt('Enter column name:');
     if (newColumnName) {
@@ -185,9 +200,7 @@ export class TaskBoardComponent implements OnInit {
   addTask() {
     if (this.newTaskTitle && this.newTaskPriority) {
       if (this.editingTaskId !== null) {
-        const taskIndex = this.tasks.findIndex(
-          (task) => task.id === this.editingTaskId
-        );
+        const taskIndex = this.tasks.findIndex(task => task.id === this.editingTaskId);
         if (taskIndex !== -1) {
           this.tasks[taskIndex] = {
             id: this.editingTaskId,
@@ -212,6 +225,7 @@ export class TaskBoardComponent implements OnInit {
       this.newTaskDescription = '';
       this.newTaskPriority = null;
       this.isDrawerOpen = false;
+      this.updateStatusTasksMap();
     } else {
       alert('Please enter task title and priority.');
     }
