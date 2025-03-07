@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="card">
+    <h2>Welcome, <br />Register Here</h2>
+
+    <!-- Ensure (ngSubmit)="onRegister()" is correctly set -->
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" maxlength="25" formControlName="name" required>
+        <span class="error" *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+          This field is required.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" id="role" maxlength="25" formControlName="role" required>
+        <span class="error" *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched">
+          This field is required.
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" maxlength="30" formControlName="email" required>
+        <span class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Please enter a valid email.
+        </span>
+      </div>
+
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
+</div>

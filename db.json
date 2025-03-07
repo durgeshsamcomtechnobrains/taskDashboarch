@@ -51,5 +51,19 @@
       "id": "5",
       "name": "Done"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Nilesh Patil",
+      "role": "Admin",
+      "email": "nilesh@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Parag Salunkhe",
+      "role": "Developer",
+      "email": "parag@example.com"
+    }
   ]
 }

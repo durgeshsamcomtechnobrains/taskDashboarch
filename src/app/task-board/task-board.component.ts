@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskComponent } from '../task/task.component';
@@ -14,6 +14,7 @@ import { TaskService } from '../services/task.service';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { IStatus } from '../interface/IStatus';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-board',
@@ -39,6 +40,7 @@ export class TaskBoardComponent implements OnInit {
   statusTasksMap: { [key: string]: ITask[] } = {};
   tasks2: ITask[] = [];
   statuses2: IStatus[] = [];
+  private router = inject(Router);
 
   constructor(private taskService: TaskService) {}
 
@@ -88,7 +90,9 @@ export class TaskBoardComponent implements OnInit {
     }
   }
 
-
+  registerUser(): void {
+    this.router.navigate(['/register']);
+  }
 
   updateStatusTasksMap() {
     this.statusTasksMap = {};

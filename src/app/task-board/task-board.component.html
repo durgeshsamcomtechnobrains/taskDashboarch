@@ -1,7 +1,12 @@
 <div class="task-board-container">
-    <button class="add-column-btn" (click)="addColumn()">
-      <mat-icon aria-hidden="false">add</mat-icon>
-    </button>
+    <div class="task-board-actions">
+      <button class="add-column-btn" (click)="addColumn()">
+        <mat-icon aria-hidden="false">add</mat-icon>
+      </button>
+      <button class="register-btn" mat-raised-button (click)="registerUser()">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </div>
   <div class="board-wrapper">
     <div class="task-board" cdkDropList [cdkDropListData]="statuses2">
       <div class="task-column" *ngFor="let status of statuses2" cdkDrag>
