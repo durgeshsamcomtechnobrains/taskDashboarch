@@ -64,6 +64,12 @@
       "name": "Parag Salunkhe",
       "role": "Developer",
       "email": "parag@example.com"
+    },
+    {
+      "id": 3,
+      "name": "sa",
+      "role": "User",
+      "email": "ashish@ff.com"
     }
   ]
 }

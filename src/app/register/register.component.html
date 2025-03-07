@@ -14,7 +14,12 @@
 
       <div class="form-group">
         <label for="role">Role</label>
-        <input type="text" id="role" maxlength="25" formControlName="role" required>
+        <select id="role" formControlName="role" required>
+          <option value="" disabled selected>Select a role</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+          <option value="Developer">Developer</option>
+        </select>
         <span class="error" *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched">
           This field is required.
         </span>
